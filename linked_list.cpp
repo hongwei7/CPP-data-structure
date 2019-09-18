@@ -6,7 +6,21 @@ struct Node
 	elem data;
 	Node * next;
 };
-Node* create_list(int a[],int n)
+Node* create_list_head(int a[],int n)
+{
+	Node *link_list=new Node;
+	Node *p=link_list,*q;
+	p->next=NULL;
+	for(int i=0;i<n;i++)
+	{
+		q=new Node;
+		q->data=a[i];
+		q->next=p->next;
+		p->next=q;
+	}
+	return link_list;
+}
+Node* create_list_tail(int a[],int n)
 {
 	Node *link_list=new Node;
 	Node *p=link_list;
@@ -193,7 +207,7 @@ bool Insert_node_before_max(Node *& L,elem e)
 	max->next=p;
 	return true;
 }
-bool reverse(Node *&L)
+bool reverse(Node *&L)//反转数组
 {
 	if(L->next==NULL)return false;
 	Node *p=L->next,*q=L->next->next;
@@ -207,11 +221,37 @@ bool reverse(Node *&L)
 	}
 	return true;
 }
+void split_two(Node *& L,Node *&L1,Node *& L2)//间隔分割
+{
+	Node *r,*p,*q;
+	L1=L;
+	p=L1;
+	r=L->next;
+	L2->next=NULL;
+	while(r!=NULL)
+	{
+		p->next=r;
+		p=p->next;
+
+		r=r->next;
+		if(r==NULL)break;
+		q=r->next;
+
+		r->next=L2->next;
+		L2->next=r;
+
+		r=q;
+	}
+	p->next=NULL;
+}
 int main()
 {
 	int a[8]={12,24,3,40,53,6,72,8};
 	elem e;
-	Node* list_1=create_list(a,sizeof(a)/sizeof(int));
+	Node* list_1_t=create_list_tail(a,sizeof(a)/sizeof(int));
+	Node* list_1=create_list_head(a,sizeof(a)/sizeof(int));
+	Disp_list(list_1_t);
+	Disp_list(list_1);
 	Node* list_2;
 	Init_list(list_2);
 	cout<<"List_length(): "<<List_length(list_2)<<endl;
@@ -221,7 +261,7 @@ int main()
 	Insert_list(list_2,1,1000);
 	Insert_list(list_1,4,1000);
 	Insert_list(list_1,5,2000);
-	Disp_list(list_2);
+	Disp_list(list_2); 
 	cout<<"List_length(): "<<List_length(list_2)<<endl;
 	cout<<"List_length(): "<<List_length(list_1)<<endl;
 	Disp_list(list_1);
@@ -240,6 +280,13 @@ int main()
 	Disp_list(list_1);
 	reverse(list_1);
 	Disp_list(list_1);
+	Node *L1=new Node;
+	Node *L2=new Node;
+	split_two(list_1,L1,L2);
+	cout<<"L1:"<<endl;
+	Disp_list(L1);
+	cout<<"L2:"<<endl;
+	Disp_list(L2);
 	Destroy_list(list_1);
 	Destroy_list(list_2);
 }
