@@ -1,9 +1,10 @@
 #include<iostream>
+#define max_size 50
 using namespace std;
 typedef int elem;
 struct sqlist
 {
-    elem data[50];
+    elem data[max_size];
     int length;
 };
 void Init_list(sqlist * & L)

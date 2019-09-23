@@ -196,7 +196,6 @@ bool Insert_node_before_max(Node *& L,elem e)
         if(p->next->data>max->next->data)
         {
             max=p;
-            cout<<max->next->data<<" t"<<endl;
         }
         p=p->next;
     }
@@ -333,8 +332,8 @@ int main()
     Disp_list(L2);
     Node* hc;
     combine(hc,list_1,list_2);
-    cout<<"hc:"<<endl;
-    Disp_list(hc);
+    //cout<<"hc:"<<endl;
+    //Disp_list(hc);
     cout<<"free L1:"<<endl;
     output_free(L1);
     Destroy_list(list_1);
