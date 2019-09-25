@@ -46,6 +46,27 @@ void Disp_stack(stack *s)
         cout<<s->data[i]<<" ";
     }cout<<endl;
 }
+bool match(char exp[20])
+{
+    stack *s;
+    Init_stack(s);
+    int e,q;
+    bool is_match=true;
+    for(int i=0;exp[i]!='\0';i++)
+    {
+        e=exp[i];
+        if(e=='('||e=='['||e=='{')
+            push(s,e);
+        else if(e==')'||e==']'||e=='}')
+        {
+            if(pop(s,q)==false)is_match=false;
+            if(e-q>3||e-q<1)is_match=false;
+        }
+    }
+    if(!Stack_empty(s))is_match=false;
+    Destroy_stack(s);
+    return is_match;
+}
 int main()
 {
     stack *stack_1;
@@ -66,4 +87,8 @@ int main()
     Disp_stack(stack_1);
     cout<<"e="<<e<<endl;
     Destroy_stack(stack_1);
+    cout<<"input expression:"<<endl;
+    char exp[50];
+    cin>>exp;
+    cout<<match(exp)<<endl;
 }
