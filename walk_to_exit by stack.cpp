@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>/*使用栈*/
 using namespace std;
 int mapdata[10][10]=
     {
@@ -33,7 +33,7 @@ struct mymap
         switch(e)
         {
         case 0:cout<<"   ";return;
-        case 1:cout<<"[O]";return;
+        case 1:cout<<"[X]";return;
         case 2:cout<<" # ";return;
         }
     }
