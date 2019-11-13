@@ -104,7 +104,7 @@ Node * create_tree_by_list(elem *pre,elem *in,int n)
     return b;
 }
 
-//层次访问 使用到队列
+//层次访问 使用队列
 struct queue
 {
     Node * data[maxsize];
