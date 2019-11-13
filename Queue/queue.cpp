@@ -3,6 +3,7 @@
 #define max_size 50
 typedef int elem;
 using namespace std;
+/*后来定义的一些函数需要stack*/
 struct stack
 {
     elem data[max_size];
