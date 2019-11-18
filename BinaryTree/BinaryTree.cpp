@@ -105,6 +105,7 @@ Node * create_tree_by_list(elem *pre,elem *in,int n)
 }
 
 //层次访问 使用队列
+//******************STACK***********************
 struct queue
 {
     Node * data[maxsize];
@@ -139,6 +140,9 @@ bool deQueue(queue *&q,Node * &e)
     q->data[q->front]=0;
     return true;
 }
+//*******************STACK***********************
+
+
 void ascess_by_level(Node *tree)
 {
     Node *p=tree;
@@ -155,13 +159,75 @@ void ascess_by_level(Node *tree)
     }
     printf("\n");
 }
+
+//halfman tree
+struct HTNode
+{
+    char data;
+    int lnode,rnode,parent;
+    double weight;
+};
+void create_HT(HTNode ht[],int n0)
+{
+    int i,k,lnode,rnode;
+    double min1,min2;
+    for(i=0;i<2*(n0-1);i++){
+        ht[i].parent=ht[i].lnode=ht[i].rnode=-1;
+    }
+    for(i=n0;i<=2*n0-2;i++){
+        min1=min2=32767;
+        lnode=rnode=-1;
+        for(k=0;k<i-1;k++)
+            if(ht[k].parent==-1){
+                if(ht[k].weight<min1){
+                    min2=min1;rnode=lnode;
+                    min1=ht[k].weight;lnode=k;
+                }
+                else if(ht[k].weight<min2){
+                    min2=ht[k].weight;rnode=k;
+                }
+            }
+        ht[i].weight=ht[lnode].weight+ht[rnode].weight;
+        ht[i].lnode=lnode;
+        ht[i].rnode=rnode;
+        ht[lnode].parent=i;ht[rnode].parent=i;
+        ht[i].data='N';
+    }
+}
+void build_halfman_byweight(HTNode ht[],double weight[],int n0)
+{
+    for(int i=0;i<n0;i++){
+        HTNode temp;
+        temp.weight=weight[i];
+        temp.data='a'+i;
+        ht[i]=temp;
+    }
+    /*print
+    printf("\n****** waiting nodes ******\n");
+    printf("data\tweights\n");
+    for (int i = 0; i < n0; ++i)
+    {
+        printf("%c\t%f\n",ht[i].data,ht[i].weight);
+    }
+    */
+    create_HT(ht,n0);
+    /*
+    printf("\n");
+    printf("\n****** halfman tree ******\n");
+    printf("data\tweights\t\tlnode\trnode\tparent\n");
+    for(int i=0;i<2*n0-1;i++){
+        printf("%c\t%f\t%d\t%d\t%d\n",ht[i].data,ht[i].weight,ht[i].lnode,ht[i].rnode,ht[i].parent);
+    }
+    */
+}
+
 int main()
 {
     char str[]="a(b,f(k(c,d),e)";
     Node *tree=new Node;
     CreateBTree(tree,str);
     putchar(tree->rchild->lchild->lchild->data);
-    printf(" %8d\n",FindNode(tree,'d'));
+    //printf(" %8d\n",FindNode(tree,'d'));
     printf("DEPTH: %d\n",BTheight(tree));
     DispBTree(tree);
     printf("\n");
@@ -170,5 +236,10 @@ int main()
     Node *tree1=create_tree_by_list(pre,in,7);
     ascess_by_level(tree1);
     DispBTree(tree1);
+
+    int n0=6;
+    HTNode ht[20];
+    double weight[6]={2,3,4,7,8,9};
+    build_halfman_byweight(ht,weight,6);
 }
 
