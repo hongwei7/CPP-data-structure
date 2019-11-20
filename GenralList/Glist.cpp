@@ -1,17 +1,6 @@
 #include<iostream>
 using namespace std;
-typedef int elem;
-
-struct GlistNode
-{
-    int tag;
-    union
-    {
-        elem data;
-        GlistNode * sublist;
-    }val;
-    GlistNode * link;
-};
+#include "Glist.h"
 void fun(GlistNode * g)
 {
     if(g!=NULL)
@@ -30,9 +19,9 @@ int Glst_length(GlistNode *g)
     int n=0;
     GlistNode *gi;
     gi=g->val.sublist;
-    while(g1!=NULL)
+    while(gi!=NULL)
     {
-        g1=g1.link;
+        gi=gi->link;
         n++;
     }
     return n;
@@ -48,7 +37,7 @@ int GlistNode_depth(GlistNode * g)
     {
         if(gi->tag==1)
         {
-            depth=GlistNode_depth(g1);
+            depth=GlistNode_depth(gi);
             if(depth>max)
                 max=depth;
         }
@@ -61,7 +50,7 @@ bool same(GlistNode *g1,GlistNode *g2)
     while(g1->link!=NULL)
     {
         if(g1->tag==1)
-            if(g2->tag==1):
+            if(g2->tag==1)
                 return same(g1->val.sublist,g2->val.sublist)&&same(g1->link,g2->link);
             else
                 return false;
@@ -91,7 +80,7 @@ void print(GlistNode *g)
         cout<<',';
         print(g->link);
     }
-    cout<<');'
+    cout<<')';
 }
 int main()
 {

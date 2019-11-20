@@ -1,11 +1,6 @@
 #include<iostream>
 using namespace std;
-typedef int elem;
-struct Node
-{
-    elem data;
-    Node * next;
-};
+#include "ListNode.h"
 Node* create_list_head(int a[],int n)
 {
     Node *link_list=new Node;

@@ -1,12 +1,6 @@
 #include<iostream>
-#define max_size 50
 using namespace std;
-typedef int elem;
-struct sqlist
-{
-    elem data[max_size];
-    int length;
-};
+#include "ListNode.h"
 void Init_list(sqlist * & L)
 {
     L=(sqlist *)malloc(sizeof(sqlist));

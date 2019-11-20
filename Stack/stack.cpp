@@ -2,11 +2,7 @@
 using namespace std;
 typedef int elem;
 #define max_size 50
-struct stack
-{
-    elem data[max_size];
-    int top;
-};
+#include "stack.h"
 void Init_stack(stack *& s)
 {
     s=new stack;

@@ -2,13 +2,7 @@
 #include<stdio.h>
 #include<iostream>
 #include<limits>
-#define elem char
-#define maxsize 50
-struct Node
-{
-    elem data;
-    Node * lchild,*rchild;
-};
+#include "BinaryTree.h"
 void CreateBTree(Node *& b,char *str)
 {
     Node * St[maxsize],*p;
@@ -124,44 +118,6 @@ Node * create_tree_by_list(elem *pre,elem *in,int n)
 }
 
 //层次访问 使用队列
-//******************STACK***********************
-struct queue
-{
-    Node * data[maxsize];
-    int front,rear;
-};
-void Init_queue(queue* &q)
-{
-    q=new queue;
-    q->front=0;
-    q->rear=0;
-}
-void Destroy_queue(queue *&q)
-{
-    free(q);
-}
-bool queue_empty(queue *q)
-{
-    return q->front==q->rear;
-}
-bool enQueue(queue *&q,Node * e)
-{
-    if(q->front==((q->rear+1)%maxsize))return false;
-    q->rear=(q->rear+1)%maxsize;
-    q->data[q->rear]=e;
-    return true;
-}
-bool deQueue(queue *&q,Node * &e)
-{
-    if(q->front==q->rear)return false;
-    q->front=(q->front+1)%maxsize;
-    e=q->data[q->front];
-    q->data[q->front]=0;
-    return true;
-}
-//*******************STACK***********************
-
-
 void ascess_by_level(Node *tree)
 {
     Node *p=tree;
@@ -180,12 +136,6 @@ void ascess_by_level(Node *tree)
 }
 
 //halfman tree
-struct HTNode
-{
-    char data;
-    int lnode,rnode,parent;
-    double weight;
-};
 void create_HT(HTNode ht[],int n0)
 {
     int i,k,lnode,rnode;

@@ -1,11 +1,7 @@
 #include<iostream>
 using namespace std;
 #define maxsize 30 
-struct mystring
-{
-    char data[maxsize];
-    int length;
-};
+#include "string.h"
 void Init_str(mystring &s)
 {
     s.length=0;

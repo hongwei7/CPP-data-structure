@@ -6,3 +6,4 @@
 - String
 - GernalList
 - BinaryTree
+- Graph

@@ -113,6 +113,7 @@ bool Get_top(stack * s,player_state *e)
     e=&(s->data[s->top]);
     return true;
 }
+
 void edit_state(player_state *man ,int i,int j,int di)
 {
     man->i=i;
