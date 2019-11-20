@@ -1,6 +1,7 @@
 /*一般二叉树 链式存储*/
 #include<stdio.h>
 #include<iostream>
+#include<limits>
 #define elem char
 #define maxsize 50
 struct Node
@@ -61,6 +62,24 @@ Node *FindNode(Node *b,elem s)
         else 
             return FindNode(b->rchild,s);
     }
+}
+elem FindMinNode(Node *b,elem value=(std::numeric_limits<char>::max)())
+{
+    if(b==NULL)
+        return value;
+    if((value)>(b->data)){
+        value=b->data;
+    }
+    return std::min(FindMinNode(b->lchild,value),FindMinNode(b->rchild,value));
+}
+int CountSingleChildNode(Node *b)
+{
+    if(b==NULL||(b->lchild==NULL&&b->rchild==NULL))
+        return 0;
+    if(b->lchild!=NULL&&b->rchild!=NULL)
+        return CountSingleChildNode(b->lchild)+CountSingleChildNode(b->rchild);
+    else
+        return 1+CountSingleChildNode(b->lchild)+CountSingleChildNode(b->rchild);
 }
 int BTheight(Node *b)
 {
@@ -231,12 +250,19 @@ int main()
     printf("DEPTH: %d\n",BTheight(tree));
     DispBTree(tree);
     printf("\n");
-    DestroyBtree(tree);
+    //DestroyBtree(tree);
     elem pre[]="abdgcef",in[]="dgbaecf";
     Node *tree1=create_tree_by_list(pre,in,7);
     ascess_by_level(tree1);
     DispBTree(tree1);
-
+    printf("\n");
+    char str2[]="a(b(k,c(,d)),)";
+    Node *tree2=new Node;
+    CreateBTree(tree2,str2);
+    printf("test\n");
+    DispBTree(tree2);
+    printf("\nCountSingleChildNode : %d\n",CountSingleChildNode(tree2));
+    printf("tree's minvalue:%c\n",FindMinNode(tree2) ); 
     int n0=6;
     HTNode ht[20];
     double weight[6]={2,3,4,7,8,9};
