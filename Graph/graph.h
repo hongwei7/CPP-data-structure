@@ -1,6 +1,6 @@
 #define MAXV 30
 #define INF 32767
-#define elem char
+#define MaxSize 1000
 struct InfoType
 {
     elem data;
