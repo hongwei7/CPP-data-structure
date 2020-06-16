@@ -4,7 +4,8 @@ struct sqlist
 {
     elem data[max_size];
     int length;
-};
+};//顺序表类型
+
 struct Node
 {
     elem data;

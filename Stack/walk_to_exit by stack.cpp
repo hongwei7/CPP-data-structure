@@ -1,6 +1,8 @@
 #include <iostream>/*使用栈*/
 using namespace std;
-int mapdata[10][10]=
+#define N 10
+
+int mapdata[N][N]=
     {
         {1,1,1,1,1,1,1,1,1,1},
         {1,0,0,1,0,0,0,1,0,1},
@@ -17,12 +19,12 @@ struct mymap
 {
     static const int entry_i=1,entry_j=1;
     static const int exit_i=1,exit_j=8;
-    int mapdata[10][10];
-    mymap(int data[10][10])
+    int mapdata[N][N];
+    mymap(int data[N][N])
     {
-        for(int i=0;i<10;i++)
+        for(int i=0;i<N;i++)
         {
-            for(int j=0;j<10;j++)
+            for(int j=0;j<N;j++)
             {
                 mapdata[i][j]=data[i][j];
             }
@@ -44,7 +46,7 @@ struct mymap
         cout<<"|------------------------------|"<<endl<<'|';
         for(int i=0;i<player_i;i++)
         {
-            for(int j=0;j<10;j++)
+            for(int j=0;j<N;j++)
             {
                 display_this(mapdata[i][j]);
             }cout<<'|'<<endl<<'|';
@@ -54,13 +56,13 @@ struct mymap
             display_this(mapdata[player_i][j]);
         }
         cout<<" P ";
-        for(int j=player_j+1;j<10;j++)
+        for(int j=player_j+1;j<N;j++)
         {
             display_this(mapdata[player_i][j]);
         }cout<<'|'<<endl<<'|';
-        for(int i=player_i+1;i<10;i++)
+        for(int i=player_i+1;i<N;i++)
         {
-            for(int j=0;j<10;j++)
+            for(int j=0;j<N;j++)
             {
                 display_this(mapdata[i][j]);
             }cout<<'|'<<endl<<'|';

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define elem int
 #include "graph.h"
+#include<algorithm>
 void CreateAdj_bymatrix(AdjGraph *&G, int A[MAXV][MAXV], int n, int e)
 {
     int i, j;
@@ -83,6 +84,8 @@ void DFS(AdjGraph * G, int v)
         p = p->next;
     }
 }
+
+
 
 //广度优先遍历
 #include "queue.h"
@@ -176,6 +179,19 @@ struct Edge
 {
     int u,v,w;
 };
+void Esort(Edge E[],int n)
+{
+    Edge e;
+    for(int i=0;i<n-1;i++){
+        for(int j=i;j<n-1;j++){
+            if(E[j].w>E[j+1].w){
+                e=E[j];
+                E[j]=E[j+1];
+                E[j+1]=e;
+            }
+        }
+    }
+}
 void Kruskal(MatGraph g)
 {
     int i,j,u1,v1,sn1,sn2,k;
@@ -189,7 +205,7 @@ void Kruskal(MatGraph g)
                 E[k].u=i;E[k].v=j;E[k].w=g.edges[i][j];
                 k++;
             }
-    InsertSort(E,g.e);
+    Esort(E,g.e);
     for(i=0;i<g.n;i++)
         vset[i]=i;
     k=1;
@@ -212,6 +228,29 @@ void Kruskal(MatGraph g)
         j++;
     }
 }
+void cal_in_out(AdjGraph *G,int in[],int out[],int &zero_out)//计算点的入度、出度、出度为零的点个数
+{
+    ArcNode * p;
+    for(int i=0;i<G->n;i++)
+    {
+        in[i]=0;
+        out[i]=0;
+    }
+    zero_out=0;
+    for(int i=0;i<G->n;i++)
+    {
+        p=G->adjlist[i].firstarc;
+        for(int j=0;j<G->n&&p!=NULL;j++)
+        {
+            out[i]++;
+            in[j]++;
+            p=p->next;
+        }
+        if(out[i]==0)
+            zero_out++;
+    }
+}
+
 int main()
 {
 

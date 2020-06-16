@@ -184,7 +184,6 @@ int main()
     cout<<"exp: "<<exp<<endl;
     trans(exp,postexp);
     cout<<"out: "<<postexp<<endl;
-    /*
-    char a[]="IIIOOIOO";
-    cout<<check(a)<<endl;*/
+    char a[]="IOIIOIOO";
+    cout<<check(a)<<endl;
 }

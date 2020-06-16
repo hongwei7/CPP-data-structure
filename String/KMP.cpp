@@ -40,7 +40,10 @@ int caluculate_next(mystring s,int i)
         }
         result++;
         head++;
-    }return result;
+    }
+    if(result==i)
+        result--;
+    return result;
 }
 int KMP(mystring s,mystring t)
 {
@@ -106,6 +109,9 @@ int main()
     //cout<<caluculate_next(s,5);
     cout<<KMP(s,t)<<endl;
     cout<<imporved_KMP(s,t)<<endl;
+    char exp[]="aaaaaab";
+    Str_assign(s,exp);
+    cout<<endl<<caluculate_next(s,6);
     return 0;
 }
 

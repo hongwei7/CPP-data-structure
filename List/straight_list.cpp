@@ -197,6 +197,18 @@ void Quick_sort(sqlist *&L,int i=-1,int j=-1)
         }
 
 }
+void delelem(sqlist *&L,int x,int y)//删除[x,y]的元素
+{
+    int i=0,k=0;
+    for(;i<L->length;i++)
+    {
+        if(L->data[i]>=x&&L->data[i]<=y)
+            k++;
+        else
+            L->data[i-k]=L->data[i];
+    }
+    L->length-=k;
+}
 
 int main()
 {
@@ -236,5 +248,7 @@ int main()
     Disp_list(L);
     cout<<"sorted:"<<endl;
     Quick_sort(L);
+    Disp_list(L);
+    delelem(L,-2,10);
     Disp_list(L);
 }
